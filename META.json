@@ -44,6 +44,7 @@
          "requires" : {
             "AnyEvent" : "0",
             "Class::Accessor::Lite" : "0",
+            "Time::HiRes" : "0",
             "Try::Tiny" : "0",
             "parent" : "0",
             "perl" : "5.008005"
@@ -60,7 +61,7 @@
    "provides" : {
       "Parallel::Async" : {
          "file" : "lib/Parallel/Async.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       },
       "Parallel::Async::Chain" : {
          "file" : "lib/Parallel/Async/Chain.pm"
@@ -80,5 +81,5 @@
          "web" : "https://github.com/karupanerura/Parallel-Async"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }

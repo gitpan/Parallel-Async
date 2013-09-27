@@ -29,7 +29,7 @@ no_index:
 provides:
   Parallel::Async:
     file: lib/Parallel/Async.pm
-    version: 0.01
+    version: 0.02
   Parallel::Async::Chain:
     file: lib/Parallel/Async/Chain.pm
   Parallel::Async::Task:
@@ -37,6 +37,7 @@ provides:
 requires:
   AnyEvent: 0
   Class::Accessor::Lite: 0
+  Time::HiRes: 0
   Try::Tiny: 0
   parent: 0
   perl: 5.008005
@@ -44,4 +45,4 @@ resources:
   bugtracker: https://github.com/karupanerura/Parallel-Async/issues
   homepage: https://github.com/karupanerura/Parallel-Async
   repository: git://github.com/karupanerura/Parallel-Async.git
-version: 0.01
+version: 0.02
