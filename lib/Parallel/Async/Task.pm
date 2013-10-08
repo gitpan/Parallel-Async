@@ -78,6 +78,26 @@ sub run {
     }
 }
 
+sub daemonize {
+    my ($self, @args) = @_;
+
+    my $orig = $self->{code};
+    local $self->{code} = sub {
+        my $pid = fork;
+        die $! unless defined $pid;
+
+        if ($pid == 0) {## child
+            $orig->(@args);
+            exit 0;
+        }
+        else {## parent
+            return $pid;
+        }
+    };
+
+    return $self->recv();
+}
+
 sub _run_on_parent {
     my $self = shift;
     return $self->{child_pid};
@@ -106,9 +126,9 @@ sub _run_on_child {
         return [0, undef, \@ret];
     }
     catch {
-        $EXIT_CODE = $!      if $!;          # errno
-        $EXIT_CODE = $? >> 8 if $? >> 8;     # child exit status
         $EXIT_CODE = 255     if !$EXIT_CODE; # last resort
+        $EXIT_CODE = $? >> 8 if $? >> 8;     # child exit status
+        $EXIT_CODE = $!      if $!;          # errno
         return [1, $_, undef];
     };
 
@@ -286,6 +306,18 @@ Execute task on child process.
 
     my $pid = $task->run($url);
     wait;
+
+=item my $pid = $task->daemonize(@args)
+
+Execute task on daemonized process.
+
+    # create new task
+    my $task = async {
+        my ($url) = @_;
+        post($url);
+    };
+
+    my $pid = $task->daemonize($url);
 
 =item my $chain = $task->join($task1, ...);
 

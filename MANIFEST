@@ -13,5 +13,6 @@ t/02_anyevent.t
 t/03_context.t
 t/04_join.t
 t/05_args.t
+t/06_daemonize.t
 META.yml
 MANIFEST
